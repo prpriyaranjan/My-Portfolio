@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Priyaranjan's Portfolio - Elite Web Developer</title>
+    <meta name="description" content="Experience Priyaranjan's elite portfolio, showcasing groundbreaking web development with React, Three.js, and AI-driven innovations." />
+    <meta name="keywords" content="Priyaranjan, web developer, portfolio, React, Three.js, AI, premium projects" />
+    <meta name="author" content="Priyaranjan" />
+    <meta name="robots" content="index, follow" />
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:title" content="Priyaranjan's Portfolio - Elite Web Developer" />
+    <meta property="og:description" content="Experience Priyaranjan's elite portfolio, showcasing groundbreaking web development with React, Three.js, and AI-driven innovations." />
+    <meta property="og:image" content="https://images.pexels.com/photos/957040/night-sky-957040.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+    <meta property="og:url" content="https://your-portfolio-url.com" />
+    <meta property="og:type" content="website" />
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Priyaranjan's Portfolio - Elite Web Developer" />
+    <meta name="twitter:description" content="Experience Priyaranjan's elite portfolio, showcasing groundbreaking web development with React, Three.js, and AI-driven innovations." />
+    <meta name="twitter:image" content="https://images.pexels.com/photos/957040/night-sky-957040.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" />
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- GSAP CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <!-- React CDNs (Production, v18.3.1) -->
+    <script src="https://cdn.jsdelivr.net/npm/react@18.3.1/umd/react.production.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/react-dom@18.3.1/umd/react-dom.production.min.js"></script>
+    <style>
+      html {
+        scroll-behavior: smooth;
+        background-color: #000000 !important;
+        overflow-x: hidden;
+        height: 100%;
+      }
+      body {
+        font-family: 'Arial', sans-serif;
+        color: #ffffff;
+        height: 100%;
+        overflow-y: auto;
+        margin: 0;
+        position: relative;
+        background: #000000 !important;
+      }
+      #root {
+        background: transparent;
+      }
+      /* Cosmic Loader */
+      #cosmic-loader {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000000;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 10000;
+      }
+      .loader-planet {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        background: radial-gradient(circle, #4deeea, #ff00cc);
+        border-radius: 50%;
+        box-shadow: 0 0 20px rgba(77, 238, 234, 0.8);
+        animation: orbit 5s linear infinite;
+      }
+      @keyframes orbit {
+        0% { transform: rotate(0deg) translateX(100px) rotate(0deg); }
+        100% { transform: rotate(360deg) translateX(100px) rotate(-360deg); }
+      }
+      .loader-nebula {
+        position: absolute;
+        width: 300px;
+        height: 300px;
+        background: radial-gradient(circle, rgba(77, 238, 234, 0.3), transparent);
+        border-radius: 50%;
+        animation: nebula-pulse 3s ease-in-out infinite;
+      }
+      @keyframes nebula-pulse {
+        0%, 100% { transform: scale(1); opacity: 0.3; }
+        50% { transform: scale(1.2); opacity: 0.5; }
+      }
+      /* Cosmic Starfield with Nebula */
+      .starfield {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: #000000;
+        z-index: -2;
+        overflow: hidden;
+      }
+      .nebula-bg {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle at 30% 20%, rgba(77, 238, 234, 0.2), transparent 50%),
+                    radial-gradient(circle at 70% 80%, rgba(255, 0, 204, 0.2), transparent 50%);
+        animation: nebula-drift 20s linear infinite;
+        opacity: 0.4;
+      }
+      @keyframes nebula-drift {
+        0% { background-position: 0% 0%, 100% 100%; }
+        50% { background-position: 50% 50%, 150% 150%; }
+        100% { background-position: 0% 0%, 100% 100%; }
+      }
+      .star {
+        position: absolute;
+        border-radius: 50%;
+        opacity: 0.8;
+        animation: twinkle 3s infinite;
+      }
+      .star.white { background: #ffffff; }
+      .star.cyan { background: #4deeea; }
+      .star.magenta { background: #ff00cc; }
+      @keyframes twinkle {
+        0%, 100% { opacity: 0.8; transform: scale(1); }
+        50% { opacity: 1; transform: scale(1.8); }
+      }
+      .shooting-star {
+        position: absolute;
+        width: 5px;
+        height: 5px;
+        background: #4deeea;
+        border-radius: 50%;
+        box-shadow: 0 0 15px rgba(77, 238, 234, 0.8);
+        opacity: 0;
+      }
+      /* Enhanced Custom Cursor */
+      .custom-cursor {
+        position: fixed;
+        width: 35px;
+        height: 35px;
+        border: 2px solid #4deeea;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9999;
+        transform: translate(-50%, -50%);
+        transition: transform 0.2s ease, width 0.2s ease, height 0.2s ease;
+        background: radial-gradient(circle, rgba(77, 238, 234, 0.3), transparent);
+        box-shadow: 0 0 30px rgba(77, 238, 234, 0.9);
+        animation: nebulaGlow 2s infinite;
+      }
+      .custom-cursor.active {
+        width: 90px;
+        height: 90px;
+        background: radial-gradient(circle, rgba(255, 0, 204, 0.4), transparent);
+        box-shadow: 0 0 60px rgba(255, 0, 204, 1);
+        border-color: #ff00cc;
+      }
+      @keyframes nebulaGlow {
+        0% { box-shadow: 0 0 30px rgba(77, 238, 234, 0.9); }
+        50% { box-shadow: 0 0 40px rgba(255, 0, 204, 1); }
+        100% { box-shadow: 0 0 30px rgba(77, 238, 234, 0.9); }
+      }
+      .custom-cursor-trail {
+        position: absolute;
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9997;
+        background: radial-gradient(circle, #4deeea, #ff00cc);
+        box-shadow: 0 0 12px rgba(77, 238, 234, 0.9);
+        animation: trailFade 0.8s ease-out;
+      }
+      @keyframes trailFade {
+        0% { opacity: 1; transform: scale(1); }
+        100% { opacity: 0; transform: scale(0.3); }
+      }
+      .cursor-burst {
+        position: absolute;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        pointer-events: none;
+        z-index: 9998;
+        background: radial-gradient(circle, #4deeea, #ff00cc);
+        box-shadow: 0 0 15px rgba(77, 238, 234, 1);
+        animation: burst 1s ease-out forwards;
+      }
+      @keyframes burst {
+        0% { transform: translate(0, 0) scale(1); opacity: 1; }
+        100% { transform: translate(calc(var(--dx) * 80px), calc(var(--dy) * 80px)) scale(0); opacity: 0; }
+      }
+      /* Interactive Elements */
+      a, button, input, textarea, .project-card, #chatbot-toggle, .navbar-logo {
+        cursor: none;
+      }
+      /* Holographic Chatbot */
+      #chatbot {
+        position: fixed;
+        bottom: 100px;
+        right: 30px;
+        width: 360px;
+        height: 520px;
+        background: rgba(10, 10, 10, 0.9);
+        border: 2px solid transparent;
+        border-radius: 24px;
+        display: none;
+        flex-direction: column;
+        z-index: 1000;
+        box-shadow: 0 0 40px rgba(77, 238, 234, 0.6);
+        backdrop-filter: blur(10px);
+        transform: translateY(20px);
+        opacity: 0;
+      }
+      #chatbot.open {
+        display: flex;
+        transform: translateY(0);
+        opacity: 1;
+      }
+      #chatbot::before {
+        content: '';
+        position: absolute;
+        inset: -2px;
+        background: linear-gradient(45deg, #4deeea, #ff00cc, #4deeea);
+        background-size: 200% 200%;
+        animation: gradient-flow 6s ease infinite;
+        z-index: -1;
+        border-radius: 24px;
+      }
+      @keyframes gradient-flow {
+        0% { background-position: 0% 50%; }
+        50% { background-position: 200% 50%; }
+        100% { background-position: 0% 50%; }
+      }
+      #chatbot-header {
+        background: linear-gradient(45deg, #4deeea, #ff00cc);
+        color: #000;
+        padding: 14px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        border-radius: 22px 22px 0 0;
+        font-weight: bold;
+      }
+      #chatbot-body {
+        flex: 1;
+        padding: 14px;
+        overflow-y: auto;
+        color: #fff;
+        font-size: 0.95rem;
+        position: relative;
+      }
+      #chatbot-body::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(circle, rgba(77, 238, 234, 0.1), transparent 70%);
+        opacity: 0.3;
+        pointer-events: none;
+      }
+      #chatbot-input {
+        width: 100%;
+        padding: 12px;
+        background: rgba(255, 255, 255, 0.1);
+        border: none;
+        color: #fff;
+        border-radius: 12px;
+        transition: box-shadow 0.3s;
+      }
+      #chatbot-input:focus {
+        box-shadow: 0 0 20px rgba(255, 0, 204, 0.9);
+        outline: none;
+      }
+      #chatbot-toggle {
+        position: fixed;
+        bottom: 30px;
+        right: 30px;
+        width: 80px;
+        height: 80px;
+        background: linear-gradient(45deg, #4deeea, #ff00cc);
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        cursor: none;
+        z-index: 1001;
+        box-shadow: 0 0 20px rgba(77, 238, 234, 0.9);
+        animation: pulse 2s infinite;
+        font-size: 1.5rem;
+      }
+      #chatbot-toggle:focus {
+        outline: 2px solid #4deeea;
+        outline-offset: 4px;
+        box-shadow: 0 0 30px rgba(77, 238, 234, 1);
+      }
+      @keyframes pulse {
+        0% { transform: scale(1); box-shadow: 0 0 20px rgba(77, 238, 234, 0.9); }
+        50% { transform: scale(1.15); box-shadow: 0 0 30px rgba(255, 0, 204, 1); }
+        100% { transform: scale(1); box-shadow: 0 0 20px rgba(77, 238, 234, 0.9); }
+      }
+      /* Cosmic Scroll Progress */
+      #scroll-progress {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 6px;
+        background: linear-gradient(90deg, #4deeea, #ff00cc);
+        z-index: 1000;
+        transform-origin: left;
+        box-shadow: 0 0 20px rgba(77, 238, 234, 0.9);
+        animation: progressGlow 2s infinite;
+      }
+      #scroll-progress::after {
+        content: '';
+        position: absolute;
+        right: 0;
+        top: -10px;
+        width: 16px;
+        height: 16px;
+        background: radial-gradient(circle, #4deeea, #ff00cc);
+        border-radius: 50%;
+        box-shadow: 0 0 15px rgba(77, 238, 234, 1);
+        animation: progress-particle 1s infinite;
+      }
+      @keyframes progressGlow {
+        0% { box-shadow: 0 0 20px rgba(77, 238, 234, 0.9); }
+        50% { box-shadow: 0 0 30px rgba(255, 0, 204, 1); }
+        100% { box-shadow: 0 0 20px rgba(77, 238, 234, 0.9); }
+      }
+      @keyframes progress-particle {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.5); opacity: 0.7; }
+      }
+      /* Ripple Effect */
+      .ripple {
+        position: absolute;
+        width: 140px;
+        height: 140px;
+        background: radial-gradient(circle, #4deeea, transparent);
+        border-radius: 50%;
+        transform: translate(-50%, -50%) scale(0);
+        animation: ripple 1.5s forwards;
+        pointer-events: none;
+        z-index: 9998;
+      }
+      @keyframes ripple {
+        0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+        100% { transform: translate(-50%, -50%) scale(3); opacity: 0; }
+      }
+      /* Navbar Logo */
+      .navbar-logo {
+        width: 60px;
+        height: 60px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        animation: logoGlow 3s infinite ease-in-out;
+        transition: transform 0.3s, box-shadow 0.3s;
+      }
+      .navbar-logo:hover {
+        transform: scale(1.3);
+        box-shadow: 0 0 40px rgba(77, 238, 234, 1);
+      }
+      @keyframes logoGlow {
+        0% { filter: brightness(1) drop-shadow(0 0 12px rgba(77, 238, 234, 0.6)); }
+        50% { filter: brightness(1.4) drop-shadow(0 0 25px rgba(77, 238, 234, 1)); }
+        100% { filter: brightness(1) drop-shadow(0 0 12px rgba(77, 238, 234, 0.6)); }
+      }
+      /* Toast Notification */
+      #toast {
+        position: fixed;
+        bottom: 30px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: rgba(10, 10, 10, 0.9);
+        color: #4deeea;
+        padding: 12px 24px;
+        border-radius: 12px;
+        border: 1px solid transparent;
+        box-shadow: 0 0 20px rgba(77, 238, 234, 0.6);
+        z-index: 1002;
+        display: none;
+        font-size: 1rem;
+        backdrop-filter: blur(5px);
+      }
+      #toast::before {
+        content: '';
+        position: absolute;
+        inset: -1px;
+        background: linear-gradient(45deg, #4deeea, #ff00cc);
+        background-size: 200% 200%;
+        animation: gradient-flow 6s ease infinite;
+        z-index: -1;
+        border-radius: 12px;
+      }
+      /* Screen Reader Only */
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        border: 0;
+      }
+    </style>
+  </head>
+  <body>
+    <!-- Cosmic Loader -->
+    <div id="cosmic-loader">
+      <div className="loader-nebula"></div>
+      <div className="loader-planet" style="animation-delay: 0s;"></div>
+      <div className="loader-planet" style="animation-delay: -1.5s; transform: rotate(0deg) translateX(120px);"></div>
+      <div className="loader-planet" style="animation-delay: -3s; transform: rotate(0deg) translateX(80px);"></div>
+    </div>
+    <!-- Starfield with Nebula -->
+    <div class="starfield" id="starfield">
+      <div class="nebula-bg"></div>
+      <!-- Stars will be generated via JavaScript -->
+    </div>
+    <!-- Fallback UI if React fails -->
+    <div id="fallback-ui" style="display: none; text-align: center; padding: 50px; color: #ff00cc;">
+      <h1>Failed to Load Portfolio</h1>
+      <p>It seems there was an issue loading the portfolio. Please check your network connection or try again later.</p>
+    </div>
+    <div id="root"></div>
+    <div id="scroll-progress"></div>
+    <div id="chatbot" role="dialog" aria-labelledby="chatbot-header">
+      <div id="chatbot-header">
+        <span>Cosmic AI Assistant</span>
+        <button id="chatbot-close" aria-label="Close chatbot">✖</button>
+      </div>
+      <div id="chatbot-body" role="log" aria-live="polite"></div>
+      <input id="chatbot-input" placeholder="Ask or command..." aria-label="Chatbot input" />
+    </div>
+    <button id="chatbot-toggle" aria-label="Toggle chatbot">🤖</button>
+    <div class="custom-cursor"></div>
+    <div id="toast"></div>
+    <script>
+      // Debug CDN and app loading
+      window.addEventListener('load', () => {
+        if (typeof React === 'undefined') {
+          console.error('React CDN failed to load');
+          showToast('Failed to load React. Displaying fallback UI.');
+          document.getElementById('fallback-ui').style.display = 'block';
+          document.getElementById('cosmic-loader').style.display = 'none';
+        }
+        if (typeof gsap === 'undefined') {
+          console.error('GSAP CDN failed to load');
+          showToast('Failed to load GSAP. Animations may not work.');
+        }
+      });
+
+      // Hide loader after app loads
+      window.addEventListener('DOMContentLoaded', () => {
+        setTimeout(() => {
+          gsap.to('#cosmic-loader', {
+            opacity: 0,
+            duration: 1,
+            ease: 'power2.out',
+            onComplete: () => {
+              document.getElementById('cosmic-loader').style.display = 'none';
+            },
+          });
+        }, 2000); // Simulate app load time
+      });
+
+      // Debounce utility
+      function debounce(func, wait) {
+        let timeout;
+        return (...args) => {
+          clearTimeout(timeout);
+          timeout = setTimeout(() => func(...args), wait);
+        };
+      }
+
+      // Show toast notification
+      function showToast(message, duration = 4000) {
+        try {
+          const toast = document.getElementById('toast');
+          if (!toast) throw new Error('Toast element not found');
+          toast.textContent = message;
+          toast.style.display = 'block';
+          gsap.fromTo(toast, 
+            { opacity: 0, y: 30 },
+            { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out' }
+          );
+          setTimeout(() => {
+            gsap.to(toast, {
+              opacity: 0,
+              y: 30,
+              duration: 0.5,
+              ease: 'power2.out',
+              onComplete: () => {
+                toast.style.display = 'none';
+              }
+            });
+          }, duration);
+        } catch (e) {
+          console.error('Show Toast Error:', e.message);
+        }
+      }
+
+      // Generate Starfield
+      function createStarfield() {
+        try {
+          const starfield = document.getElementById('starfield');
+          if (!starfield) throw new Error('Starfield element not found');
+          
+          // Create 80 stars with varied colors
+          const colors = ['white', 'cyan', 'magenta'];
+          for (let i = 0; i < 80; i++) {
+            const star = document.createElement('div');
+            const color = colors[Math.floor(Math.random() * colors.length)];
+            star.className = `star ${color}`;
+            const size = Math.random() * 3 + 1;
+            star.style.width = `${size}px`;
+            star.style.height = `${size}px`;
+            star.style.left = `${Math.random() * 100}%`;
+            star.style.top = `${Math.random() * 100}%`;
+            star.dataset.depth = Math.random() * 0.5 + 0.5;
+            star.style.animationDelay = `${Math.random() * 3}s`;
+            starfield.appendChild(star);
+          }
+
+          // Create shooting stars
+          function createShootingStar() {
+            try {
+              const shootingStar = document.createElement('div');
+              shootingStar.className = 'shooting-star';
+              const startX = Math.random() * window.innerWidth;
+              const startY = Math.random() * window.innerHeight * 0.4;
+              const endX = startX - 400;
+              const endY = startY + 400;
+              shootingStar.style.left = `${startX}px`;
+              shootingStar.style.top = `${startY}px`;
+              starfield.appendChild(shootingStar);
+              gsap.to(shootingStar, {
+                x: endX - startX,
+                y: endY - startY,
+                opacity: 1,
+                duration: 1.2,
+                ease: 'power2.out',
+                onStart: () => shootingStar.style.opacity = 1,
+                onComplete: () => shootingStar.remove(),
+              });
+            } catch (e) {
+              console.error('Create Shooting Star Error:', e.message);
+            }
+          }
+          setInterval(createShootingStar, Math.random() * 3000 + 2000);
+        } catch (e) {
+          console.error('Create Starfield Error:', e.message);
+          showToast('Failed to create starfield.');
+        }
+      }
+
+      // Toggle Chatbot with Animation
+      function toggleChatbot() {
+        try {
+          const chatbot = document.getElementById('chatbot');
+          const toggle = document.getElementById('chatbot-toggle');
+          if (!chatbot || !toggle) throw new Error('Chatbot or toggle element not found');
+          const isOpen = chatbot.classList.contains('open');
+          if (isOpen) {
+            gsap.to(chatbot, {
+              opacity: 0,
+              y: 20,
+              duration: 0.5,
+              ease: 'power2.out',
+              onComplete: () => {
+                chatbot.style.display = 'none';
+                chatbot.classList.remove('open');
+                toggle.style.display = 'flex';
+              },
+            });
+          } else {
+            chatbot.style.display = 'flex';
+            gsap.fromTo(chatbot, 
+              { opacity: 0, y: 20 },
+              { opacity: 1, y: 0, duration: 0.5, ease: 'power2.out', onComplete: () => chatbot.classList.add('open') }
+            );
+            toggle.style.display = 'none';
+          }
+          if (!isOpen) {
+            for (let i = 0; i < 3; i++) {
+              const particle = document.createElement('div');
+              particle.className = 'cursor-burst';
+              const rect = toggle.getBoundingClientRect();
+              particle.style.left = `${rect.left + rect.width / 2}px`;
+              particle.style.top = `${rect.top + rect.height / 2}px`;
+              particle.style.setProperty('--dx', Math.random() * 2 - 1);
+              particle.style.setProperty('--dy', Math.random() * 2 - 1);
+              document.body.appendChild(particle);
+              setTimeout(() => particle.remove(), 1000);
+            }
+            if (recognition) {
+              try {
+                recognition.start();
+                showToast('Voice recognition started.');
+              } catch (e) {
+                console.error('SpeechRecognition Start Error:', e.message);
+                showToast('Failed to start voice recognition.');
+              }
+            }
+          } else if (recognition) {
+            try {
+              recognition.stop();
+              showToast('Voice recognition stopped.');
+            } catch (e) {
+              console.error('SpeechRecognition Stop Error:', e.message);
+              showToast('Failed to stop voice recognition.');
+            }
+          }
+        } catch (e) {
+          console.error('Toggle Chatbot Error:', e.message);
+          showToast('Failed to toggle chatbot.');
+        }
+      }
+
+      // Initialize
+      document.addEventListener('DOMContentLoaded', () => {
+        try {
+          // Chatbot Event Listeners
+          const toggle = document.getElementById('chatbot-toggle');
+          const close = document.getElementById('chatbot-close');
+          if (toggle) {
+            toggle.addEventListener('click', toggleChatbot);
+            toggle.addEventListener('keypress', (e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                toggleChatbot();
+              }
+            });
+          } else {
+            console.error('Chatbot toggle not found');
+          }
+          if (close) close.addEventListener('click', toggleChatbot);
+          else console.error('Chatbot close not found');
+
+          // Create Custom Cursor
+          if (!document.querySelector('.custom-cursor')) {
+            const cursor = document.createElement('div');
+            cursor.className = 'custom-cursor';
+            document.body.appendChild(cursor);
+          }
+
+          // Initialize Starfield
+          createStarfield();
+
+          // Starfield Parallax
+          const stars = document.querySelectorAll('.star');
+          window.addEventListener('scroll', () => {
+            const scrollY = window.scrollY;
+            stars.forEach((star) => {
+              const depth = parseFloat(star.dataset.depth);
+              gsap.to(star, {
+                y: scrollY * depth * 0.05,
+                duration: 0.5,
+                ease: 'power2.out',
+              });
+            });
+          });
+
+          // Star Mouse Interactivity
+          document.addEventListener('mousemove', (e) => {
+            try {
+              stars.forEach((star) => {
+                const rect = star.getBoundingClientRect();
+                const starX = rect.left + rect.width / 2;
+                const starY = rect.top + rect.height / 2;
+                const dx = (e.clientX - starX) * 0.05;
+                const dy = (e.clientY - starY) * 0.05;
+                gsap.to(star, {
+                  x: dx,
+                  y: dy,
+                  duration: 1,
+                  ease: 'power2.out',
+                  overwrite: 'auto',
+                });
+              });
+            } catch (e) {
+              console.error('Star Mousemove Error:', e.message);
+            }
+          });
+        } catch (e) {
+          console.error('DOMContentLoaded Error:', e.message);
+          showToast('Failed to initialize page.');
+        }
+      });
+
+      // Custom Cursor Movement
+      let trailCount = 0;
+      document.addEventListener('mousemove', debounce((e) => {
+        try {
+          const cursor = document.querySelector('.custom-cursor');
+          if (!cursor) throw new Error('Custom cursor not found');
+          gsap.to(cursor, { x: e.clientX, y: e.clientY, duration: 0.2, ease: 'power2.out' });
+          if (trailCount % 20 === 0) {
+            const trail = document.createElement('div');
+            trail.className = 'custom-cursor-trail';
+            trail.style.left = `${e.clientX}px`;
+            trail.style.top = `${e.clientY}px`;
+            document.body.appendChild(trail);
+            setTimeout(() => trail.remove(), 800);
+          }
+          trailCount++;
+          if (Math.random() < 0.005) {
+            const ripple = document.createElement('div');
+            ripple.className = 'ripple';
+            ripple.style.left = `${e.clientX}px`;
+            ripple.style.top = `${e.clientY}px`;
+            document.body.appendChild(ripple);
+            setTimeout(() => ripple.remove(), 1500);
+          }
+        } catch (e) {
+          console.error('Mousemove Error:', e.message);
+          showToast('Failed to update cursor effect.');
+        }
+      }, 50));
+
+      // Click Burst Effect
+      document.addEventListener('click', (e) => {
+        try {
+          for (let i = 0; i < 4; i++) {
+            const burst = document.createElement('div');
+            burst.className = 'cursor-burst';
+            burst.style.left = `${e.clientX}px`;
+            burst.style.top = `${e.clientY}px`;
+            burst.style.setProperty('--dx', Math.random() * 2 - 1);
+            burst.style.setProperty('--dy', Math.random() * 2 - 1);
+            document.body.appendChild(burst);
+            setTimeout(() => burst.remove(), 1000);
+          }
+          const ripple = document.createElement('div');
+          ripple.className = 'ripple';
+          ripple.style.left = `${e.clientX}px`;
+          ripple.style.top = `${e.clientY}px`;
+          document.body.appendChild(ripple);
+          setTimeout(() => ripple.remove(), 1500);
+        } catch (e) {
+          console.error('Click Burst Error:', e.message);
+          showToast('Failed to create click effect.');
+        }
+      });
+
+      // Cursor Hover State
+      const hoverables = document.querySelectorAll('a, button, input, textarea, .project-card, #chatbot-toggle, .navbar-logo');
+      hoverables.forEach((el) => {
+        el.addEventListener('mouseenter', () => {
+          document.querySelector('.custom-cursor')?.classList.add('active');
+        });
+        el.addEventListener('mouseleave', () => {
+          document.querySelector('.custom-cursor')?.classList.remove('active');
+        });
+      });
+
+      // Scroll Progress
+      let lastScroll = 0;
+      const progressBar = document.getElementById('scroll-progress');
+      document.addEventListener('scroll', debounce(() => {
+        try {
+          const now = Date.now();
+          if (now - lastScroll < 100) return;
+          lastScroll = now;
+          const scrollTop = document.documentElement.scrollTop;
+          const scrollHeight = document.documentElement.scrollHeight - window.innerHeight;
+          const progress = (scrollTop / scrollHeight) * 100;
+          if (progressBar) progressBar.style.width = `${progress}%`;
+          else console.error('Scroll progress bar not found');
+        } catch (e) {
+          console.error('Scroll Progress Error:', e.message);
+          showToast('Failed to update scroll progress.');
+        }
+      }, 100));
+
+      // Chatbot Input Handling
+      function handleKeyPress(e) {
+        try {
+          const chatbotBody = document.getElementById('chatbot-body');
+          const chatbotInput = document.getElementById('chatbot-input');
+          if (!chatbotBody || !chatbotInput) throw new Error('Chatbot elements not available');
+          if (e.key === 'Enter' && chatbotInput.value.trim()) {
+            const input = chatbotInput.value.trim().toLowerCase();
+            const responses = {
+              'who are you': 'I’m Priyaranjan’s Cosmic AI, guiding you through his stellar portfolio!',
+              'what can you do': 'I can answer questions, navigate sections, or trigger animations. Try "show projects", "show contact", "scroll down", or "scroll up"!',
+              'show projects': () => document.getElementById('projects')?.scrollIntoView({ behavior: 'smooth' }),
+              'show contact': () => document.getElementById('contact')?.scrollIntoView({ behavior: 'smooth' }),
+              'show skills': () => document.getElementById('skills')?.scrollIntoView({ behavior: 'smooth' }),
+              'show about': () => document.getElementById('about')?.scrollIntoView({ behavior: 'smooth' }),
+              'show home': () => document.getElementById('hero')?.scrollIntoView({ behavior: 'smooth' }),
+              'scroll down': () => window.scrollBy({ top: window.innerHeight, behavior: 'smooth' }),
+              'scroll up': () => window.scrollBy({ top: -window.innerHeight, behavior: 'smooth' }),
+            };
+            const addMessage = (message, isUser = false) => {
+              const messageDiv = document.createElement('div');
+              messageDiv.className = `mb-2 ${isUser ? 'text-right' : 'text-left'}`;
+              messageDiv.textContent = message;
+              messageDiv.style.color = isUser ? '#ff00cc' : '#4deeea';
+              chatbotBody.appendChild(messageDiv);
+              chatbotBody.scrollTop = chatbotBody.scrollHeight;
+            };
+            addMessage(input, true);
+            let response = responses[input] || 'Command not recognized. Try "show projects", "show contact", or "scroll down"!';
+            if (typeof response === 'function') {
+              response();
+              response = 'Navigating to the section!';
+            }
+            addMessage(response);
+            chatbotInput.value = '';
+            for (let i = 0; i < 3; i++) {
+              const particle = document.createElement('div');
+              particle.className = 'cursor-burst';
+              const rect = chatbotBody.getBoundingClientRect();
+              particle.style.left = `${rect.left + Math.random() * rect.width}px`;
+              particle.style.top = `${rect.top + Math.random() * rect.height}px`;
+              particle.style.setProperty('--dx', Math.random() * 2 - 1);
+              particle.style.setProperty('--dy', Math.random * 2 - 1);
+              document.body.appendChild(particle);
+              setTimeout(() => particle.remove(), 1000);
+            }
+          }
+        } catch (e) {
+          console.error('Chatbot Keypress Error:', e.message);
+          showToast('Failed to send message.');
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        try {
+          const chatbotInput = document.getElementById('chatbot-input');
+          if (chatbotInput) {
+            chatbotInput.addEventListener('keypress', handleKeyPress);
+            chatbotInput.addEventListener('focus', () => {
+              chatbotInput.setAttribute('aria-describedby', 'chatbot-input-desc');
+              if (!document.getElementById('chatbot-input-desc')) {
+                const desc = document.createElement('span');
+                desc.id = 'chatbot-input-desc';
+                desc.className = 'sr-only';
+                desc.textContent = 'Type your message and press Enter to send. You can ask about projects, skills, contact, or say "scroll down" or "scroll up".';
+                document.body.appendChild(desc);
+              }
+            });
+          } else {
+            console.error('Chatbot input not found');
+          }
+        } catch (e) {
+          console.error('Chatbot Input Listener Error:', e.message);
+          showToast('Failed to initialize chatbot input.');
+        }
+      });
+
+      // Speech Recognition
+      let recognition = null;
+      function initSpeechRecognition() {
+        if (!window.SpeechRecognition && !window.webkitSpeechRecognition) {
+          console.warn('SpeechRecognition not supported');
+          const chatbotBody = document.getElementById('chatbot-body');
+          if (chatbotBody) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = 'mb-2 text-left';
+            messageDiv.textContent = 'Speech recognition not supported. Use text input to interact.';
+            messageDiv.style.color = '#ff00cc';
+            chatbotBody.appendChild(messageDiv);
+            chatbotBody.scrollTop = chatbotBody.scrollHeight;
+          }
+          showToast('Speech recognition not supported.');
+          return;
+        }
+        try {
+          recognition = new (window.SpeechRecognition || window.webkitSpeechRecognition)();
+          recognition.continuous = false;
+          recognition.interimResults = false;
+          recognition.onresult = (event) => {
+            try {
+              const command = event.results[event.results.length - 1][0].transcript.toLowerCase();
+              const sections = {
+                home: 'hero',
+                about: 'about',
+                projects: 'projects',
+                skills: 'skills',
+                contact: 'contact',
+                chat: toggleChatbot,
+                'scroll down': () => window.scrollBy({ top: window.innerHeight, behavior: 'smooth' }),
+                'scroll up': () => window.scrollBy({ top: -window.innerHeight, behavior: 'smooth' }),
+              };
+              let handled = false;
+              for (const [key, value] of Object.entries(sections)) {
+                if (command.includes(key)) {
+                  if (typeof value === 'function') {
+                    value();
+                  } else {
+                    const element = document.getElementById(value);
+                    if (element) {
+                      element.scrollIntoView({ behavior: 'smooth' });
+                    } else {
+                      console.warn(`Section ${value} not found`);
+                      showToast(`Section "${key}" not found.`);
+                    }
+                  }
+                  handled = true;
+                  break;
+                }
+              }
+              if (!handled) {
+                showToast('Voice command not recognized. Try "show projects", "show contact", or "scroll down".');
+              }
+            } catch (e) {
+              console.error('SpeechRecognition Result Error:', e.message);
+              showToast('Failed to process voice command.');
+            }
+          };
+          recognition.onend = () => {
+            try {
+              if (document.getElementById('chatbot').classList.contains('open')) {
+                recognition.start();
+              }
+            } catch (e) {
+              console.error('SpeechRecognition Restart Error:', e.message);
+            }
+          };
+          recognition.onerror = (event) => {
+            console.error('SpeechRecognition Error:', event.error);
+            if (event.error === 'not-allowed') {
+              const chatbotBody = document.getElementById('chatbot-body');
+              if (chatbotBody) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'mb-2 text-left';
+                messageDiv.textContent = 'Microphone access denied. Enable permissions for voice navigation.';
+                messageDiv.style.color = '#ff00cc';
+                chatbotBody.appendChild(messageDiv);
+                chatbotBody.scrollTop = chatbotBody.scrollHeight;
+              }
+              showToast('Microphone access denied.');
+            }
+          };
+        } catch (e) {
+          console.error('SpeechRecognition Initialization Error:', e.message);
+          showToast('Failed to initialize voice recognition.');
+        }
+      }
+
+      navigator.permissions.query({ name: 'microphone' }).then((result) => {
+        try {
+          if (result.state === 'granted' || result.state === 'prompt') {
+            initSpeechRecognition();
+          } else {
+            console.warn('Microphone permission denied');
+            showToast('Microphone permission denied. Voice navigation disabled.');
+          }
+        } catch (e) {
+          console.error('Permission Query Error:', e);
+          initSpeechRecognition();
+        }
+      }).catch((e) => {
+        console.error('Permission Query Error:', e);
+        initSpeechRecognition();
+      });
+
+      // Cleanup
+      window.addEventListener('beforeunload', () => {
+        try {
+          if (recognition) {
+            recognition.stop();
+            recognition.onresult = null;
+            recognition.onend = null;
+            recognition.onerror = null;
+            recognition = null;
+          }
+          const chatbotInput = document.getElementById('chatbot-input');
+          if (chatbotInput) {
+            chatbotInput.removeEventListener('keypress', handleKeyPress);
+            chatbotInput.removeEventListener('focus', () => {});
+          }
+          const toggle = document.getElementById('chatbot-toggle');
+          const close = document.getElementById('chatbot-close');
+          if (toggle) toggle.removeEventListener('click', toggleChatbot);
+          if (close) close.removeEventListener('click', toggleChatbot);
+        } catch (e) {
+          console.error('Cleanup Error:', e.message);
+        }
+      });
+    </script>
+    <script type="module" src="/src/main.jsx" defer></script>
+  </body>
+</html>
